@@ -252,3 +252,58 @@ function summarizeArrayReduce(arr) {
 const data2 = [10, 5, 8, 1, 12];
 console.log(summarizeArrayReduce(data2));
 // { min: 1, max: 12, sum: 36 }
+
+// ------------------- sum of squares of even numbers ------------------
+const nums = [1, 2, 3, 4, 5, 6];
+
+// Filter even numbers → square them → reduce to sum
+const total = nums
+    .filter(n => n % 2 === 0) // keep even
+    .map(n => n * n)          // square
+    .reduce((acc, n) => acc + n, 0); // sum
+
+console.log(total);
+
+// ------------------ Implement ------------------
+const initial = {
+    even: [],
+    odd: [],
+    sum: 0,
+    avg: 0,
+    length: 0
+}
+
+const array_input = [1,2,3,4,5,6,7,8,9,10];
+
+const result = array_input.reduce((acc, value) => {
+    if (value % 2 === 0) {
+        acc.even.push(value);
+    } else {
+        acc.odd.push(value);
+    }
+    acc.sum += value;
+    acc.length += 1;
+    return acc;
+}, initial);
+
+if (result.length > 0) {
+    result.avg = result.sum / result.length;
+} else {
+    result.avg = 0;
+}
+
+console.log(result);
+
+// ------------------ shorter ------------------
+const array_input2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const result2 = array_input.reduce((acc, value) => {
+    (value % 2 === 0 ? acc.even : acc.odd).push(value);
+    acc.sum += value;
+    acc.length++;
+    return acc;
+}, { even: [], odd: [], sum: 0, avg: 0, length: 0 });
+
+result.avg = result.length ? result.sum / result.length : 0;
+
+console.log(result);
